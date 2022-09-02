@@ -2,10 +2,7 @@ local tbl = require('plenary.tbl')
 local log = require('lspdiags.internal.log')
 
 local DEFAULTS = {
-    debounce = {
-        enabled = true,
-        delay = 150,
-    },
+    debounce = 150,
     triggers = {
         'WinEnter',
         'BufEnter',

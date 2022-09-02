@@ -31,7 +31,7 @@ function M.init()
     local cfg = require('lspdiags.internal.config').get()
     M.debounce_populate = utils.debounce(function()
         M.populate_qflist()
-    end, cfg.debounce.delay)
+    end, cfg.debounce)
 end
 
 return M

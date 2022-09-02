@@ -2,15 +2,13 @@ local qf = require('lspdiags.qflist')
 local M = {}
 
 function M.open()
-    qf.populate_qflist()
+    qf.debounce_populate()
     vim.cmd([[ copen ]])
+    M.isopen = true
 
     -- Disable line numbers
     vim.opt_local.nu = false
     vim.opt_local.rnu = false
-
-    -- Enable wrapping
-    qf.set_win_option('wrap', true)
 end
 
 function M.close()
@@ -18,6 +16,7 @@ function M.close()
         return
     end
     vim.cmd([[ cclose ]])
+    M.isopen = false
 end
 
 function M.update_list()
@@ -28,6 +27,14 @@ function M.update_list()
     end
 
     qf.debounce_populate()
+end
+
+function M.toggle()
+    if M.isopen then
+        M.close()
+    else
+        M.open()
+    end
 end
 
 return M
